@@ -11,6 +11,25 @@ const currencySpan = document.getElementById("currency")
 //Charger les pays dans le select
 loadCountries()
 
+// Afficher les infos du pays selectionné
+countrySelect.addEventListener("change", () => {
+    const selected = countrySelect.selectedOptions[0]
+
+    if (!selected.value) {
+        infoDiv.classList.add("hidden");
+        return;
+    }
+
+    flagImg.src = selected.dataset.flag
+    flagImg.alt = `Le drapeau de ${selected.textContent}`
+    capitalSpan.textContent = selected.dataset.capital
+    populationSpan.textContent = Number(selected.dataset.population).toLocaleString()
+    currencySpan.textContent = selected.dataset.currency
+
+
+    infoDiv.classList.remove("hidden")
+})
+
 //Fonction loadCountries() pour charger les pays
 async function loadCountries() {
     try{
@@ -29,6 +48,11 @@ async function loadCountries() {
             const opt = document.createElement("option")
             opt.value = c.cca3 //code iso du pays
             opt.textContent = c.name.common //nom du pays
+            opt.dataset.flag = c.flags.png //Le drapeau
+            opt.dataset.capital = c.capital[0] //la capitale
+            opt.dataset.population = c.population //Population
+            opt.dataset.currency = Object.keys(c.currencies).join(", ") //Monnaie
+
             countrySelect.appendChild(opt)
         })
 
