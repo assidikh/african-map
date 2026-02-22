@@ -1,0 +1,16 @@
+.hidden{
+    display: none;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+}
+
+#info{
+    margin-top: 20px;
+}
+
+img{
+    border: 1px, solid, black;
+}
