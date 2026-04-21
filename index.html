@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>African Map</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>African Map</h1>
+
+    <label for="country">Selectionner un pays</label>
+    <select id="country">
+        <option value="">---Chargement des pays---</option>
+        <option value="">Angola</option>
+        <option value="">Chad</option>
+        <option value="">Senegal</option>
+        <option value="">Zambia</option>
+    </select>
+
+    <div id="info" class="hidden">
+        <img id="flag" src="flag-chad.PNG" alt="" width="150">
+        <p>Capitale: <span id="capital">Ndjamena</span></p>
+        <p>Population: <span id="Population">19 340 757</span></p>
+        <p>Monnaie: <span id="currency">XAF</span></p>
+    </div>
+    
+    <script src="script.js" defer></script>
+</body>
+</html>
