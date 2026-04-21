@@ -11,3 +11,23 @@ body{
 .hidden{
     display: none;
 }
+
+.search-wrapper {
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    width: 100%;
+    max-width: 300px; /* On garde une taille raisonnable */
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: #27ae60; /* Une couleur verte pour rappeler l'Afrique */
+    background-color: #fff;
+}
