@@ -3,8 +3,10 @@ const countrySelect = document.getElementById("country");
 const infoDiv = document.getElementById("info")
 const flagImg = document.getElementById("flag")
 const capitalSpan = document.getElementById("capital")
-const populationSpan = document.getElementById("population")
+const populationSpan = document.getElementById("Population")
 const currencySpan = document.getElementById("currency")
+
+
 
 // Afficher les infos du pays selectionné
 countrySelect.addEventListener("change", () => {
@@ -17,7 +19,21 @@ countrySelect.addEventListener("change", () => {
         return;
     }
 
-    // --- Suite de la logique ici ---
+    // Mettre à jour l'image du drapeau
+    flagImg.src = selected.dataset.flag;
+    flagImg.alt = `Le drapeau de ${selected.textContent}`;
+
+    // Mettre à jour les spans de détails
+    capitalSpan.textContent = selected.dataset.capital;
+
+    // Formater la population pour qu'elle soit lisible (toLocaleString)
+    populationSpan.textContent = Number(selected.dataset.population).toLocaleString();
+
+    // Mettre à jour la monnaie
+    currencySpan.textContent = selected.dataset.currency;
+
+    // Afficher la section d'informations en retirant la classe 'hidden'
+    infoDiv.classList.remove("hidden");
 });
 
 //Fonction loadCountries() pour charger les pays
@@ -38,6 +54,11 @@ async function loadCountries() {
             const opt = document.createElement("option")
             opt.value = c.cca3 //code iso du pays
             opt.textContent = c.name.common //nom du pays
+
+            opt.dataset.flag = c.flags.png //Le drapeau
+            opt.dataset.capital = c.capital[0] //la capitale
+            opt.dataset.population = c.population //Population
+            opt.dataset.currency = Object.keys(c.currencies).join(", ") //Monnaie
             
             countrySelect.appendChild(opt)
         })
