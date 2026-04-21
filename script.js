@@ -17,6 +17,16 @@ async function loadCountries() {
         countries.sort(
             (a,b) => a.name.common.localeCompare(b.name.common)  
         )
+
+        // Remplir le select
+        countrySelect.innerHTML = `<option value="">-- Sélectionner un pays --</option>`
+        countries.forEach(c => {
+            const opt = document.createElement("option")
+            opt.value = c.cca3 //code iso du pays
+            opt.textContent = c.name.common //nom du pays
+            
+            countrySelect.appendChild(opt)
+        })
         
         // Vérification dans la console
         console.log("Données reçues :", countries); 
