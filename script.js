@@ -5,6 +5,10 @@ const flagImg = document.getElementById("flag")
 const capitalSpan = document.getElementById("capital")
 const populationSpan = document.getElementById("Population")
 const currencySpan = document.getElementById("currency")
+const searchInput = document.getElementById("searchInput"); // Récupération de l'élément searchInput
+
+//Notre "Mémoire" locale
+let allCountries = []; // On déclare un tableau vide qui va stocker TOUS les pays
 
 
 
