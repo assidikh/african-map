@@ -6,6 +6,20 @@ const capitalSpan = document.getElementById("capital")
 const populationSpan = document.getElementById("population")
 const currencySpan = document.getElementById("currency")
 
+// Afficher les infos du pays selectionné
+countrySelect.addEventListener("change", () => {
+    // 1. Récupérer l'élément HTML <option> qui est actuellement sélectionné
+    const selected = countrySelect.selectedOptions[0];
+
+    // 2. Gérer le cas où l'utilisateur sélectionne l'option par défaut vide
+    if (!selected.value) {
+        infoDiv.classList.add("hidden");
+        return;
+    }
+
+    // --- Suite de la logique ici ---
+});
+
 //Fonction loadCountries() pour charger les pays
 async function loadCountries() {
     try{
