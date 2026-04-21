@@ -12,6 +12,11 @@ async function loadCountries() {
         // Récupérer les pays depuis l'api
         const res = await fetch("https://restcountries.com/v3.1/region/africa");
         const countries = await res.json();
+
+        // Trier les pays par ordre alphabétique
+        countries.sort(
+            (a,b) => a.name.common.localeCompare(b.name.common)  
+        )
         
         // Vérification dans la console
         console.log("Données reçues :", countries); 
