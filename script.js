@@ -10,6 +10,21 @@ const searchInput = document.getElementById("searchInput"); // Récupération de
 //Notre "Mémoire" locale
 let allCountries = []; // On déclare un tableau vide qui va stocker TOUS les pays
 
+// On écoute la saisie de l'utilisateur dans la barre de recherche
+searchInput.addEventListener("input", (e) => {
+    // 1. On récupère ce qui est tapé et on le met en minuscules
+    const term = e.target.value.toLowerCase();
+
+    // 2. L'Algorithme de filtrage
+    const filtered = allCountries.filter(country => {
+        const name = country.name.common.toLowerCase();
+        return name.includes(term);
+    });
+
+    // 3. On met à jour l'affichage avec les pays filtrés
+    displayCountries(filtered);
+});
+
 
 
 // Afficher les infos du pays selectionné
@@ -52,20 +67,11 @@ async function loadCountries() {
             (a,b) => a.name.common.localeCompare(b.name.common)  
         )
 
-        // Remplir le select
-        countrySelect.innerHTML = `<option value="">-- Sélectionner un pays --</option>`
-        countries.forEach(c => {
-            const opt = document.createElement("option")
-            opt.value = c.cca3 //code iso du pays
-            opt.textContent = c.name.common //nom du pays
+        // On remplit d'abord allCountries
+        allCountries = countries;
 
-            opt.dataset.flag = c.flags.png //Le drapeau
-            opt.dataset.capital = c.capital[0] //la capitale
-            opt.dataset.population = c.population //Population
-            opt.dataset.currency = Object.keys(c.currencies).join(", ") //Monnaie
-            
-            countrySelect.appendChild(opt)
-        })
+        // Maintenant on affiche ce qu'on vient de mémoriser
+        displayCountries(allCountries);
         
         // Vérification dans la console
         console.log("Données reçues :", countries); 
@@ -73,6 +79,27 @@ async function loadCountries() {
     catch (e) {
         console.error("Erreur lors du chargement: ", e)
     }
+}
+
+// Cette fonction peut maintenant afficher soit tous les pays, soit seulement 3 !
+function displayCountries(list) {
+    // 1. ON VIDE le menu actuel pour repartir de zéro
+    countrySelect.innerHTML = `<option value="">-- Sélectionner un pays --</option>`;
+
+    // 2. On parcourt la liste (complète ou filtrée)
+    list.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c.cca3;
+        opt.textContent = c.name.common;
+
+        // On garde nos datasets pour que les détails fonctionnent toujours
+        opt.dataset.flag = c.flags.png;
+        opt.dataset.capital = c.capital ? c.capital[0] : "N/A";
+        opt.dataset.population = c.population;
+        opt.dataset.currency = c.currencies ? Object.keys(c.currencies).join(", ") : "N/A";
+
+        countrySelect.appendChild(opt);
+    });
 }
 
 
